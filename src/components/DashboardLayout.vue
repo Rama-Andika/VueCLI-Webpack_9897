@@ -7,49 +7,46 @@
                         I Putu Rama Andika Putra
                     </v-list-item-title>
                     <v-list-item-subtitle>
-                    180709897
+                        180709897
                     </v-list-item-subtitle>
                 </v-list-item-content>
             </v-list-item>
+    <v-divider></v-divider>
 
-            <v-divider></v-divider>
-
-            <v-list dense nav>
-                <v-list-item
-                    v-for="item in items"
-                    :key="item.title"
-                    link
-                    tag="router-link"
-                    :to="item.to"
-                >
-
-                    <v-list-item-content>
-                        <v-list-item-title>{{ item.title }}</v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
-            </v-list>
-        </v-navigation-drawer>
-        <div class="grey lighten-4 fullheight pa-5">
-            <router-view></router-view>
-        </div>
-    </div>
+<v-list dense nav>
+    <v-list-item
+        v-for="item in items"
+        :key="item.title"
+        link
+        tag="router-link"
+        :to="item.to">
+        <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </v-list-item-content>
+    </v-list-item>
+ </v-list>
+ </v-navigation-drawer>
+ <div class="grey lighten-4 fullheight pa-5">
+    <router-view></router-view>
+ </div>
+ </div>
 </template>
-
 <script>
 export default {
-    name: "Dashboard",
-    data() {
-        return {
-            items: [
-                { title: "Dashboard", to:"/" },
-                { title: "GD", to: "/gd" },
-            ],
-        };
-    },
+name: "Dashboard",
+data() {
+    return {
+        items: [
+            { title: "Dashboard", to: "/" },
+            { title: "GD", to: "/gd" },
+            { title: "UGD", to: "/ugd" },
+        ],
+    };
+},
 };
 </script>
 <style scoped>
 .fullheight {
-    min-height: 100vh !important;
+min-height: 100vh !important;
 }
 </style>
