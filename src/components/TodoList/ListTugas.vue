@@ -32,6 +32,10 @@
 					<v-icon color="red" small @click="deleteItem(item)">
 						mdi-delete
 					</v-icon>
+
+                    <input type="checkbox" 
+                        v-model="item.delete" 
+                        style="margin-left: 200px;" @change="checked(item)">
 				</template>
 			</v-data-table>
 		</v-card>
@@ -66,6 +70,24 @@
 				</v-card-actions>
 			</v-card>
 		</v-dialog>
+
+        <v-card>
+            <v-card-title>
+                <h3>Delete Multiple</h3>
+            </v-card-title>
+            <v-card-text>
+                <ul v-for="(todos, i) in selected" :key="i">
+                    <li>
+                       {{todos.task}} 
+                    </li>
+                </ul>
+            </v-card-text>
+            <v-card-actions>
+                <v-btn color="red" @click="hapusAll">
+                Hapus Semua 
+            </v-btn>
+            </v-card-actions>
+        </v-card>
 
 		<v-dialog v-model="dialogDelete" persistent max-width="350px">
 			<v-card>
@@ -164,7 +186,8 @@ export default {
 				task: null,
 				priority: null,
 				note: null,
-			},
+            },
+            selected: [],
 		};
 	},
 	methods: {
@@ -211,12 +234,23 @@ export default {
 			this.todos.splice(this.editIndex, 1);
 			this.dialogDelete = false;
 			this.editIndex = -1;
-		},
+        },
+        hapusAll(){
+            this.todos = this.todos.filter(del=>!this.selected.includes(del));
+            this.selected = [];
+        },
 		getColor(prioritas) {
 			if (prioritas === "Penting") return "red";
 			else if (prioritas === "Biasa") return "blue";
 			else return "green";
-		},
+        },
+        checked(item){
+            if(this.selected.includes(item)) {
+                this.selected.splice(this.selected.indexOf(item), 1);
+            } else {
+                this.selected.push(item);
+            }
+        }
 	},
 };
 </script>
