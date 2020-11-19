@@ -76,7 +76,7 @@
             <v-card-title>
                 <h3>Delete Multiple</h3>
             </v-card-title>
-            <v-card-text>
+            <v-card-text align="left">
                 <ul v-for="(todos, i) in selected" :key="i">
                     <li>
                        {{todos.task}} 
