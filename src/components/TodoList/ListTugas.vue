@@ -36,6 +36,7 @@
                     <input type="checkbox" 
                         v-model="item.delete" 
                         style="margin-left: 200px;" @change="checked(item)">
+
 				</template>
 			</v-data-table>
 		</v-card>
@@ -221,13 +222,13 @@ export default {
 			};
 			this.dialog = true;
 		},
-		deleteItem(item) {
-			this.editIndex = this.todos.indexOf(item);
-			this.dialogDelete = true;
-		},
 		cancelDelete() {
 			this.dialogDelete = false;
 			this.editIndex = -1;
+		},
+		deleteItem(item) {
+			this.editIndex = this.todos.indexOf(item);
+			this.dialogDelete = true;
 		},
 		confirmDelete() {
 			this.finishedTodos.push(this.todos[this.editIndex]);
