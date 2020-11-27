@@ -6,40 +6,50 @@ Vue.use(VueRouter)
 function importComponent(path) {
     return () => import(`./components/${path}.vue`)
 }
+
 Vue.use(VueRouter);
 
 const router = new VueRouter({
- mode: "history",
+    mode: "history",
     routes: [
+     {
+        path: "/",
+        component: importComponent('DashboardLayout'),
+        children: [
+            //Dashboard
+            {
+                path: "/dashboard",
+                name: "Dashboard",
+                meta: {title: 'Dashboard'},
+                component: importComponent('Dashboard'),
+            },
+            // Products
+            {
+                path: "/products",
+                name: "Products",
+                meta: {title: 'Products'},
+                component: importComponent('DataMaster/Products'),
+            },
+        ]
+      },
+        // Login
         {
-            path: "/",
-            name: "admin",
-            component: importComponent('DashboardLayout'),
-            children: [
-                //Dashboard
-        {
-            path: "/",
-            name: "Root",
-            component: importComponent('Dashboard'),
+            path: "/login",
+            name: "login",
+            meta: {title: 'Login'},
+            component: importComponent('Login'),
         },
-                // To do list
         {
-            path: "/gd",
-            name: "Guided",
-            component: importComponent('TodoList/List'),
+            path: '*',
+            redirect: '/'
         },
-        {
-            path: "/ugd",
-            name: "UnGuided",
-            component: importComponent('TodoList/ListUGD'),
-        },
-        {
-            path: "/tgs",
-            name: "Tugas",
-            component: importComponent('TodoList/ListTugas'),
-        },
-    ]
- },
- ]
+    ],
 });
+
+//Mengset Judul
+router.beforeEach((to, from, next) => {
+    document.title = to.meta.title
+    next()
+});
+
 export default router;
